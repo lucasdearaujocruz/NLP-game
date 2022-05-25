@@ -1,7 +1,7 @@
 NLP game
 ==============================
 
-A short description of the project.
+Designing of a game using NLP inspired by [Jenna Xu's "How New York Are You?" game](https://experiments.withgoogle.com/how-new-york-are-you)
 
 Project Organization
 ------------
@@ -53,5 +53,3 @@ Project Organization
 
 
 --------
-
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
