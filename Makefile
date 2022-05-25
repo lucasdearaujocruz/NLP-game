@@ -16,6 +16,8 @@ else
 HAS_CONDA=True
 endif
 
+TAG = dev
+
 #################################################################################
 # COMMANDS                                                                      #
 #################################################################################
@@ -37,22 +39,6 @@ clean:
 ## Lint using flake8
 lint:
 	flake8 src
-
-## Upload Data to S3
-sync_data_to_s3:
-ifeq (default,$(PROFILE))
-	aws s3 sync data/ s3://$(BUCKET)/data/
-else
-	aws s3 sync data/ s3://$(BUCKET)/data/ --profile $(PROFILE)
-endif
-
-## Download Data from S3
-sync_data_from_s3:
-ifeq (default,$(PROFILE))
-	aws s3 sync s3://$(BUCKET)/data/ data/
-else
-	aws s3 sync s3://$(BUCKET)/data/ data/ --profile $(PROFILE)
-endif
 
 ## Set up python interpreter environment
 create_environment:
@@ -80,7 +66,13 @@ test_environment:
 # PROJECT RULES                                                                 #
 #################################################################################
 
+## Build Docker Image
+docker_build:
+	docker build -t nlp-game:$(TAG) -f Dockerfile .
 
+## Run Docker Container
+docker_run:
+	docker run -it --gpus all --name game-$(TAG) --rm --volume='/home/lucas/Projects/NLP game/NLP-game':/project nlp-game:$(TAG)
 
 #################################################################################
 # Self Documenting Commands                                                     #
